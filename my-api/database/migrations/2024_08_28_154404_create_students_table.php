@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('career');
             $table->enum('grade', ['I', 'II', 'III', 'IV', 'V']);
-            $table->unsignedInteger('average');
+            //Rango entre 0 y 100
+            $table->unsignedInteger('average')->between(0, 100);
             $table->timestamps();
         });
     }
