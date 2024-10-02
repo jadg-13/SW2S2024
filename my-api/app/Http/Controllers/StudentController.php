@@ -7,6 +7,19 @@ use App\Models\Student;
 
 class StudentController extends Controller
 {
+    /* Codigos de respuesta
+    200: OK. La solicitud ha tenido éxito.
+    201: Creado. La solicitud ha tenido éxito y se ha creado un nuevo recurso como resultado de ella.
+    204: Sin contenido. La solicitud se ha completado con éxito pero su respuesta no tiene ningún contenido.
+    400: Solicitud incorrecta. La solicitud no se pudo procesar porque la sintaxis de la solicitud es incorrecta.
+    401: No autorizado. La solicitud no se pudo procesar porque no tiene credenciales válidas.
+    403: Prohibido. La solicitud no se pudo procesar porque no tiene permiso para acceder al recurso solicitado.
+    404: No encontrado. El servidor no pudo encontrar el recurso solicitado.
+    405: Método no permitido. El método de solicitud no es válido para el recurso solicitado.
+    500: Error interno del servidor. El servidor encontró una situación inesperada que le impidió completar la solicitud.
+    */
+
+
     /**
      * Display a listing of the resource.
      */
@@ -25,7 +38,7 @@ class StudentController extends Controller
         return response()->json([
             'status' => 'success',
             'data' => $students
-        ]);
+        ], 200);
     }
 
     /**
@@ -40,9 +53,9 @@ class StudentController extends Controller
                 'status' => 'success',
                 'message' => 'Estudiante creado exitosamente',
                 'data' => $student
-            ]);
+            ], 201);
         } catch (\Exception $e) {
-            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()], 400);
         }
     }
 
@@ -60,12 +73,13 @@ class StudentController extends Controller
             return response()->json([
                 'status' => 'success',
                 'data' => $student
-            ]);
+
+            ], 200);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage()
-            ]);
+            ], 400);
         }
     }
 
@@ -82,12 +96,12 @@ class StudentController extends Controller
                 'status' => 'success',
                 'message' => 'Estudiante actualizado exitosamente',
                 'data' => $student
-            ]);
+            ], 200);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage()
-            ]);
+            ], 400);
         }
     }
 
@@ -103,12 +117,12 @@ class StudentController extends Controller
             return response()->json([
                 'status' => 'success',
                 'message' => 'Estudiante eliminado exitosamente'
-            ]);
+            ], 200);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage()
-            ]);
+            ], 400);
         }
     }
 }
